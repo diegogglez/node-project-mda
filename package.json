@@ -6,7 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "charactersSeed":"node ./src/utils/seeds/characters.seed.js",
+    "kingdomsSeed": "node ./src/utils/seeds/kingdoms.seed.js",
+    "originsSeed": "node ./src/utils/seeds/origin.seed.js"
   },
   "author": "",
   "license": "ISC",
