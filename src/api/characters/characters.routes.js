@@ -35,15 +35,16 @@ router.get('/getByName/:name', async (req, res) =>{
 });
 
 //* Crear un personaje
-router.post('/create', async(req, res) => {
-  try {
+router.post("/create", async(req, res) =>{  
+  try { 
     const character = req.body;
     const newCharacter = new Character(character);
     const created = await newCharacter.save();
     return res.status(201).json(created);
 
-  } catch (error) {
-    return res.status(500).json('Error al crear el personaje :(');
+  } catch (err) {
+    return res.status(500).json("Error al crear el personaje");
+    
   }
 });
 
@@ -63,7 +64,7 @@ router.delete('/delete/:id', async (req, res) => {
 router.delete('/delete/:name', async (req, res) => {
 
   try {
-    const name = req.params.id;
+    const name = req.params.name;
     const characterToDelete = await Character.findOneAndDelete({name: name});
     return res.status(200).json("Se ha conseguido borrar el personaje");
   } catch (error) {

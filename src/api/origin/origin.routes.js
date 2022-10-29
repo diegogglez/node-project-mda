@@ -12,4 +12,16 @@ router.get('/', async (req, res) =>{
   }
 });
 
+router.post('/create', async (req, res) => {
+  try {
+    const origin = req.body;
+    const newOrigin = new Origin(origin);
+    const created = await newOrigin.save();
+    return res.status(201).json(created);
+  } catch (error) {
+    return res.status(500).json('F en el chat')
+    
+  }
+})
+
 module.exports = router;

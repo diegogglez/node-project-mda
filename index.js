@@ -10,7 +10,7 @@ const server = express();
 
 
 const PORT = process.env.PORT;
-
+server.use(express.json());
 
 server.use('/characters', characterRoutes);
 server.use('/kingdoms', kingdomsRoutes);
