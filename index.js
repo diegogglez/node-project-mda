@@ -1,5 +1,4 @@
 const express = require('express');
-require("dotenv").config();
 const cloudinary = require('cloudinary').v2;
 const cors = require("cors");
 
@@ -7,7 +6,9 @@ const cors = require("cors");
 const characterRoutes = require('./src/api/characters/characters.routes');
 const kingdomsRoutes = require('./src/api/kingdoms/kingdoms.routes');
 const originsRoutes = require('./src/api/origin/origin.routes');
+const userRoutes = require('./src/api/users/user.routes');
 const db = require('./src/utils/database/db');
+require("dotenv").config();
 db.connectDb();
 const server = express();
 
@@ -18,19 +19,19 @@ cloudinary.config({
 })
 
 
-
-
 const PORT = process.env.PORT;
 server.use(express.json());
 
 server.use(cors({
   origin: "*",
   credentials: true
-}))
+}));
 
 server.use('/characters', characterRoutes);
 server.use('/kingdoms', kingdomsRoutes);
 server.use('/origins', originsRoutes);
+server.use('/users', userRoutes);
+
 
 
 server.listen(PORT, () => {

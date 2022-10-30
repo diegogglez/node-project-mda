@@ -2,6 +2,7 @@ const express = require('express');
 const Character = require('./characters.model');
 const router = express.Router();
 const upload = require('../../middlewares/file');
+const { deleteFile } = require('../../middlewares/deleteFile');
 
 //* Todos los personajes
 router.get('/', async (req, res) =>{
