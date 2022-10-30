@@ -10,7 +10,6 @@ const userRoutes = require('./src/api/users/user.routes');
 const db = require('./src/utils/database/db');
 require("dotenv").config();
 db.connectDb();
-const server = express();
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -19,13 +18,18 @@ cloudinary.config({
 })
 
 
+const server = express();
 const PORT = process.env.PORT;
-server.use(express.json());
 
 server.use(cors({
   origin: "*",
   credentials: true
 }));
+
+
+server.use(express.json());
+
+server.use(express.urlencoded({ extended: false }));
 
 server.use('/characters', characterRoutes);
 server.use('/kingdoms', kingdomsRoutes);

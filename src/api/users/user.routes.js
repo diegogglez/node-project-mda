@@ -19,8 +19,12 @@ router.post("/postNewUser", async (req, res) => {
   try {
     const user = req.body;
     const newUser = new User(user);
-    const created = await newUser.save();
-    return res.status(200).json(created);
+    if(newUser.rol === 'user') {
+      const created = await newUser.save();
+      return res.status(201).json(created);
+    } else {
+      return res.status(500).json("A donde vas flipao, yo decido quien es admin");
+    }
   } catch (err) {
     return res.status(500).json("Error al crear el usuario");
   }
