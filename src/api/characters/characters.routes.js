@@ -1,6 +1,7 @@
 const express = require('express');
 const Character = require('./characters.model');
 const router = express.Router();
+const { isAuth, isAdmin } = require('../../middlewares/auth');
 const upload = require('../../middlewares/file');
 const { deleteFile } = require('../../middlewares/deleteFile');
 
@@ -15,7 +16,7 @@ router.get('/', async (req, res) =>{
 });
 
 //* Personaje por id
-router.get('/:id', async (req, res) =>{
+router.get('/:id', [isAuth], async (req, res) =>{
   try {
     const id = req.params.id;
     const characterToFind = await Character.findById(id);
@@ -26,7 +27,7 @@ router.get('/:id', async (req, res) =>{
 });
 
 //* Personaje por nombre
-router.get('/getByName/:name', async (req, res) =>{
+router.get('/getByName/:name', [isAuth], async (req, res) =>{
   try {
     const name = req.params.name;
     const characterToFind = await Character.findOne({name: name});
@@ -37,7 +38,7 @@ router.get('/getByName/:name', async (req, res) =>{
 });
 
 //* Crear un personaje
-router.post("/create", upload.single('img') ,async(req, res) =>{  
+router.post("/create", [isAdmin], upload.single('img') ,async(req, res) =>{  
   try { 
     const character = req.body;
     if (req.file) {
@@ -54,7 +55,7 @@ router.post("/create", upload.single('img') ,async(req, res) =>{
 });
 
 //* Eliminar un personaje por id
-router.delete('/delete/:id', async (req, res) => {
+router.delete('/delete/:id', [isAdmin], async (req, res) => {
 
   try {
     const id = req.params.id;
@@ -66,7 +67,7 @@ router.delete('/delete/:id', async (req, res) => {
 });
 
 //* Eliminar un personaje por nombre
-router.delete('/delete/:name', async (req, res) => {
+router.delete('/delete/:name', [isAdmin], async (req, res) => {
 
   try {
     const name = req.params.name;
