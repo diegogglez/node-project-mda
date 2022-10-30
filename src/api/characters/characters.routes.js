@@ -1,6 +1,7 @@
 const express = require('express');
 const Character = require('./characters.model');
 const router = express.Router();
+const upload = require('../../middlewares/file');
 
 //* Todos los personajes
 router.get('/', async (req, res) =>{
@@ -35,9 +36,12 @@ router.get('/getByName/:name', async (req, res) =>{
 });
 
 //* Crear un personaje
-router.post("/create", async(req, res) =>{  
+router.post("/create", upload.single('img') ,async(req, res) =>{  
   try { 
     const character = req.body;
+    if (req.file) {
+      character.img = req.file.path;
+    }
     const newCharacter = new Character(character);
     const created = await newCharacter.save();
     return res.status(201).json(created);
