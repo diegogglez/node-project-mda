@@ -27,7 +27,7 @@ server.use(cors({
 }));
 
 
-server.use(express.json());
+server.use(express.json({limit: "5mb"}));
 
 server.use(express.urlencoded({ extended: false }));
 
