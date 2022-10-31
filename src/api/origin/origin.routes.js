@@ -38,7 +38,7 @@ router.get('/:id', async (req, res) =>{
 
 
 
-//* Crear un reino
+//* Crear un origin
 router.post('/create', async (req, res) => {
   try {
     const origin = req.body;
