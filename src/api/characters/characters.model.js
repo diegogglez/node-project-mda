@@ -9,7 +9,7 @@ const characterSchema = new Schema(
     role: { type: String, enum: ['light', 'darkness', 'undefined'], default: 'undefined' },
     weapons: { type: String },
     img: { type: String, default: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Kingdom_Hearts_logo.svg/1200px-Kingdom_Hearts_logo.svg.png' },
-    origin: [{ type: mongoose.Schema.Types.ObjectId, trim: true, ref: 'origins' }]
+    origin: [{ type: mongoose.Schema.Types.ObjectId, required: true, trim: true, ref: 'origins' }]
   },
   {
     timestamps: true,
